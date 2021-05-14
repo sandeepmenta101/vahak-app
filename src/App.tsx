@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useState } from 'react';
 
 import Header from "./common/Header";
 import Banner from "./common/Banner";
