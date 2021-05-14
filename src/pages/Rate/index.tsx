@@ -56,7 +56,7 @@ export default function Rate() {
           <Form>
             <Field name="amount">
               {(props: InputInterface) => {
-                const { field, form, meta } = props;
+                const { field } = props;
                 return (
                   <div className={styles.formControl}>
                     <i className="fas fa-rupee-sign"></i>
@@ -72,7 +72,7 @@ export default function Rate() {
             </Field>
             <Field name="rateNegotiable">
               {(props: InputInterface) => {
-                const { field, form, meta } = props;
+                const { field } = props;
                 return (
                   <div className={styles.checkboxContainer}>
                     <label>
