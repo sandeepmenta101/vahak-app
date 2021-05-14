@@ -1,8 +1,10 @@
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useHistory } from "react-router-dom";
+
 import styles from "./styles.module.scss";
 import Input from "../../common/Input";
-import { Formik, Form, Field, ErrorMessage } from "formik";
 import InputInterface from "./../../Interfaces/Input.interface";
-import Select from '../../common/Select';
+import Select from "../../common/Select";
 
 const initialValues = {
   source: "",
@@ -11,11 +13,12 @@ const initialValues = {
   noOfTravellers: "",
 };
 
-const onSubmit = (values: Object) => {
-  console.log(values);
-};
-
 export default function LocationDetails() {
+  const history = useHistory();
+
+  const onSubmit = (values: Object) => {
+    history.push('/rate');
+  };
   return (
     <Formik initialValues={initialValues} onSubmit={onSubmit}>
       <Form className={styles.form}>
@@ -25,8 +28,8 @@ export default function LocationDetails() {
               props["placeholder"] = "Enter Source Location";
               props["id"] = "Source";
               props["labelName"] = "Source Location";
-              props['inputType'] = 'text';
-               return <Input {...props} />;
+              props["inputType"] = "text";
+              return <Input {...props} />;
             }}
           </Field>
           <Field name="destination">
@@ -34,7 +37,7 @@ export default function LocationDetails() {
               props["placeholder"] = "Enter Destination Location";
               props["id"] = "Destination";
               props["labelName"] = "Destination Location";
-              props['inputType'] = 'text';  
+              props["inputType"] = "text";
               return <Input {...props} />;
             }}
           </Field>
@@ -42,19 +45,17 @@ export default function LocationDetails() {
         <Field name="carType" as="select">
           <option value="">Select Car type</option>
           <option value="hatchBack">HatchBack</option>
-          <option value="Sedan">Sedan</option> 
+          <option value="Sedan">Sedan</option>
           <option value="suv">SUV</option>
         </Field>
         <Field name="noOfTravellers">
-          {
-            (props: InputInterface) => {
-              props['placeholder'] = "Enter Number of Travellers";
-              props['id'] = 'noOfTravellers';
-              props['labelName'] = "Number of Travellers";
-              props['inputType'] = 'number';
-              return <Input {...props} />
-            }
-          }
+          {(props: InputInterface) => {
+            props["placeholder"] = "Enter Number of Travellers";
+            props["id"] = "noOfTravellers";
+            props["labelName"] = "Number of Travellers";
+            props["inputType"] = "number";
+            return <Input {...props} />;
+          }}
         </Field>
         <button type="submit">Enter Bid Details</button>
       </Form>

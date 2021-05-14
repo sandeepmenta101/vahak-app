@@ -1,11 +1,14 @@
-import styles from '../styles.module.scss';
-import  BannerInterface from '../../Interfaces/Banner.interface';
+import styles from "../styles.module.scss";
+import BannerInterface from "../../Interfaces/Banner.interface";
 
-export default function Banner(props: BannerInterface){
-    
-    return(
+export default function Banner(props: BannerInterface) {
+  return (
+    <>
+      {props.content.length > 0 && (
         <section className={styles.banner}>
-            <h1>{props.content}</h1>
+          <h1>{props.content}</h1>
         </section>
-    )
+      )}
+    </>
+  );
 }

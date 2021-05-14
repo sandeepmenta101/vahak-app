@@ -4,8 +4,6 @@ import InputInterface from "../../Interfaces/Input.interface";
 export default function Input(props: InputInterface) {
   const { form, field, meta, placeholder, id, labelName, inputType } = props;
 
-  console.log(props);
-
   return (
     <>
       <div className={`${inputType === 'text' ? styles.form__group : styles.form__number__group}`}>

@@ -105,3 +105,41 @@
         width: 100%;
       }
     }
+
+    .card{
+      border-bottom: 1px solid $gray;
+      padding: 10px 15px;
+      display: flex;
+      justify-content: space-between;
+      width: 50%;
+      margin: 20px auto 10px;
+      .left{
+        h4{
+          color: $gray;
+          text-transform: uppercase;
+          font-weight: $normal;
+          margin: 0;
+        }
+      }
+      .right{
+        button{
+          color: $buttonBackground;
+          border: 0;
+          background-color: transparent;
+          font-weight: $bold;
+          font-size: 1.2rem;
+        }
+      }
+  }
+  .amountContainer{
+    border-bottom: 1px solid #9b9b9b;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    margin: 20px auto 10px;
+    h1{
+      font-size: 3rem;
+    }
+  }
