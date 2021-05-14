@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import Header from "./common/Header";
 import Banner from "./common/Banner";
@@ -11,8 +11,6 @@ import VerifyOtp from './pages/VerifyOtp/index';
 import SubmitForm from './pages/SubmitForm/index';
 import ErrorComponent from './pages/404/index';
 function App() {
-  const [content, setContent] = useState('');
-
   return (
     <Router>
       <div className="App">

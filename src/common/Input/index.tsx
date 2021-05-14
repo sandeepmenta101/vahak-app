@@ -2,7 +2,7 @@ import styles from "../styles.module.scss";
 import InputInterface from "../../Interfaces/Input.interface";
 
 export default function Input(props: InputInterface) {
-  const { form, field, meta, placeholder, id, labelName, halfWidth, inputType, required } = props;
+  const { field, meta, placeholder, id, labelName, halfWidth, inputType, required } = props;
 
   return (
     <>
