@@ -93,6 +93,7 @@
 
     .form__number__group{
       width: 100%;
+      margin: 0 15px;
     }
     input[type='number']::-webkit-outer-spin-button,
     input[type='number']::-webkit-inner-spin-button{
@@ -134,12 +135,13 @@
   .amountContainer{
     border-bottom: 1px solid #9b9b9b;
     padding: 10px 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 50%;
     margin: 20px auto 10px;
-    h1{
-      font-size: 3rem;
+    display: flex;
+    justify-content: space-between;
+    .right{
+      h1{
+        font-size: 3rem;
+      }
     }
   }

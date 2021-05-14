@@ -7,5 +7,6 @@ export default interface InputInterface{
     placeholder: string,
     labelName: string,
     id: string,
-    inputType: string
+    inputType: string,
+    halfWidth: boolean
 }

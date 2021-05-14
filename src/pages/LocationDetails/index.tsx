@@ -1,26 +1,44 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field } from "formik";
 import { useHistory } from "react-router-dom";
+import * as Yup from 'yup';
 
 import styles from "./styles.module.scss";
 import Input from "../../common/Input";
 import InputInterface from "./../../Interfaces/Input.interface";
-import Select from "../../common/Select";
+import { useEffect } from 'react';
 
-const initialValues = {
+let initialValues = {
   source: "",
   destination: "",
   carType: "",
   noOfTravellers: "",
 };
 
+const validationSchema = Yup.object({
+  source: Yup.string().required('Source Location is required field'),
+  destination: Yup.string().required('Destination Location is required field'),
+  carType: Yup.string().required('Car type is required field'),
+  noOfTravellers: Yup.string().required('Number of Travellers is required field')
+})
+
+
 export default function LocationDetails() {
   const history = useHistory();
 
+  useEffect(() => {
+    const isEditFlow = localStorage.getItem('bidEdit');
+    if(isEditFlow === 'true'){
+      const formData = JSON.parse(localStorage.getItem('BidUser')!);
+      initialValues = formData;
+    }
+  }, []);
+
   const onSubmit = (values: Object) => {
-    history.push('/rate');
+    localStorage.setItem('BidUser', JSON.stringify(values));
+    history.push({pathname: '/rate', state: values});
   };
   return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit}>
+    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
       <Form className={styles.form}>
         <div className={styles.container}>
           <Field name="source">
@@ -29,6 +47,7 @@ export default function LocationDetails() {
               props["id"] = "Source";
               props["labelName"] = "Source Location";
               props["inputType"] = "text";
+              props['halfWidth'] = true;
               return <Input {...props} />;
             }}
           </Field>
@@ -38,6 +57,7 @@ export default function LocationDetails() {
               props["id"] = "Destination";
               props["labelName"] = "Destination Location";
               props["inputType"] = "text";
+              props['halfWidth'] = true;
               return <Input {...props} />;
             }}
           </Field>
@@ -54,6 +74,7 @@ export default function LocationDetails() {
             props["id"] = "noOfTravellers";
             props["labelName"] = "Number of Travellers";
             props["inputType"] = "number";
+            props['halfWidth'] = false;
             return <Input {...props} />;
           }}
         </Field>

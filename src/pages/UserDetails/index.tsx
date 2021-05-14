@@ -1,28 +1,67 @@
 import { Formik, Form, Field } from "formik";
+import { useState, useEffect } from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
 
 import BidDetails from "./../../common/BidDetails/index";
 import AmountDetails from "./../../common/AmountDetails/index";
 import InputInterface from "./../../Interfaces/Input.interface";
 import Input from "../../common/Input";
 import styles from "./styles.module.scss";
-const initialValues = {
+import TravelInterface from '../../Interfaces/Travel.interface';
+import BidInterface from './../../Interfaces/Bid.interface';
+let initialValues = {
   phoneNumber: "",
   username: "",
   remarks: "",
 };
 
 export default function UserDetails() {
+  const bidData = {
+    source: '',
+    destination: '',
+    noOfTravellers: 0,
+    carType: '',
+    rateNegotiable: false,
+    amount: 0
+  }
+
+  const [bidUserData, setBidUserData] = useState<TravelInterface>(bidData);
+  const { state } = useLocation<TravelInterface>();
+  const history = useHistory();
+  useEffect(() => {
+    if (Object.keys(state).length > 0) {
+      setBidUserData(state);
+    } else {
+      const bidUser: string = localStorage.getItem("BidUser") || "";
+      const bidStoredData: TravelInterface = JSON.parse(bidUser);
+      setBidUserData(bidStoredData);
+    }
+    const isEditFlow = localStorage.getItem('bidEdit');
+    if(isEditFlow === 'true'){
+      const formData = JSON.parse(localStorage.getItem('BidUser')!);
+      initialValues = formData;
+    }
+  }, []);
+
   const onSubmit = (values: object) => {
+    localStorage.setItem(
+      "BidUser",
+      JSON.stringify({ ...bidUserData, ...values })
+    );
+    history.push({
+      pathname: "/otp",
+      state: { ...bidUserData, ...values },
+    });
   };
   return (
     <>
       <BidDetails
-        source="Mumbai/MH"
-        destination="Chennai/TN"
-        vehicleType="SUV"
-        noOfTravellers="5"
+        source={bidUserData['source']}
+        destination={bidUserData['destination']}
+        carType={bidUserData['carType']}
+        noOfTravellers={bidUserData['noOfTravellers']}
       />
-      <AmountDetails amount="10000" />
+      <AmountDetails amount={bidUserData['amount']} rateNegotiable={bidUserData['rateNegotiable']} />
       <div className={styles.formContainer}>
         <Formik initialValues={initialValues} onSubmit={onSubmit}>
           <Form>
@@ -41,6 +80,7 @@ export default function UserDetails() {
                 props["labelName"] = "Enter your Name";
                 props["inputType"] = "text";
                 props["placeholder"] = "Enter your Name";
+                props['halfWidth'] = false;
                 return <Input {...props} />;
               }}
             </Field>
@@ -50,6 +90,7 @@ export default function UserDetails() {
                 props["labelName"] = "Enter Remarks (optional)";
                 props["inputType"] = "text";
                 props["placeholder"] = "Enter Remarks (optional)";
+                props['halfWidth'] = false;
                 return <Input {...props} />;
               }}
             </Field>
