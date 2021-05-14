@@ -41,7 +41,7 @@ export default function VerifyOtp() {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { maxLength, name, value } = event.currentTarget;
-    const [fieldName, fieldIndex] = name.split("_");
+    const [fieldIndex] = name.split("_");
     if (value.length >= maxLength) {
       if (parseInt(fieldIndex, 10) < 4) {
         const nextSibling = document.querySelector(

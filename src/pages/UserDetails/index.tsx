@@ -69,7 +69,7 @@ export default function UserDetails() {
       />
       <AmountDetails amount={bidUserData['amount']} rateNegotiable={bidUserData['rateNegotiable']} />
       <div className={styles.formContainer}>
-        <Formik initialValues={initialValues} onSubmit={onSubmit}>
+        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
           <Form>
             <Field name="phoneNumber">
               {(props: InputInterface) => {
