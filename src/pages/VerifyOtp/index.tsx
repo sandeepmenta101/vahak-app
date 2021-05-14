@@ -38,9 +38,10 @@ export default function VerifyOtp() {
       setBidUserData(bidStoredData);
     }
   }, []);// eslint-disable-line
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { maxLength, name, value } = event.currentTarget;
-    const [fieldIndex] = name.split("_");
+    const [fieldArray, fieldIndex] = name.split("_");
     if (value.length >= maxLength) {
       if (parseInt(fieldIndex, 10) < 4) {
         const nextSibling = document.querySelector(
