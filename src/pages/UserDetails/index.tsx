@@ -47,7 +47,7 @@ export default function UserDetails() {
       const formData = JSON.parse(localStorage.getItem('BidUser')!);
       initialValues = formData;
     }
-  }, []);
+  }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
   const onSubmit = (values: object) => {
     localStorage.setItem(
