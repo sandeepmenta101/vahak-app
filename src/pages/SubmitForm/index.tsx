@@ -34,7 +34,7 @@ export default function SubmitForm(){
         return () => {
           localStorage.clear();
         }
-      }, []);// eslint-disable-line react-hooks/exhaustive-deps
+      }, []);// eslint-disable-line
 
       const submitForm = () => {
         setSuccess(true);

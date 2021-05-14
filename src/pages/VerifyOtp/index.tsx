@@ -37,8 +37,7 @@ export default function VerifyOtp() {
       const bidStoredData: OtpInterface = JSON.parse(bidUser);
       setBidUserData(bidStoredData);
     }
-  }, []);// eslint-disable-line react-hooks/exhaustive-deps
-
+  }, []);// eslint-disable-line
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { maxLength, name, value } = event.currentTarget;
     const [fieldIndex] = name.split("_");

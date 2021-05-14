@@ -30,7 +30,7 @@ export default function Rate() {
       const bidData: BidInterface = JSON.parse(bidUser);
       setBidUserData(bidData);
     }
-  }, []);// eslint-disable-line react-hooks/exhaustive-deps
+  }, []);// eslint-disable-line
 
   const onSubmit = (values: object) => {
     localStorage.setItem(
