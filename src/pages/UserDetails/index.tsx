@@ -1,6 +1,7 @@
 import { Formik, Form, Field } from "formik";
 import { useState, useEffect } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
+import * as Yup from 'yup';
 
 import BidDetails from "./../../common/BidDetails/index";
 import AmountDetails from "./../../common/AmountDetails/index";
@@ -8,12 +9,17 @@ import InputInterface from "./../../Interfaces/Input.interface";
 import Input from "../../common/Input";
 import styles from "./styles.module.scss";
 import TravelInterface from '../../Interfaces/Travel.interface';
-import BidInterface from './../../Interfaces/Bid.interface';
 let initialValues = {
   phoneNumber: "",
   username: "",
   remarks: "",
 };
+
+let validationSchema = Yup.object({
+  phoneNumber: Yup.number().required().max(10, 'Invalid number'),
+  username: Yup.string().required(),
+  remarks: Yup.string()
+})
 
 export default function UserDetails() {
   const bidData = {
@@ -71,6 +77,7 @@ export default function UserDetails() {
                 props["labelName"] = "Enter your 10 digits Mobile Number";
                 props["inputType"] = "number";
                 props["placeholder"] = "Enter your 10 digits Mobile Number";
+                props['required'] = true;
                 return <Input {...props} />;
               }}
             </Field>
@@ -81,6 +88,7 @@ export default function UserDetails() {
                 props["inputType"] = "text";
                 props["placeholder"] = "Enter your Name";
                 props['halfWidth'] = false;
+                props['required'] = true;
                 return <Input {...props} />;
               }}
             </Field>
@@ -91,6 +99,7 @@ export default function UserDetails() {
                 props["inputType"] = "text";
                 props["placeholder"] = "Enter Remarks (optional)";
                 props['halfWidth'] = false;
+                props['required'] = false;
                 return <Input {...props} />;
               }}
             </Field>

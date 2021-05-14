@@ -14,11 +14,11 @@ let initialValues = {
   noOfTravellers: "",
 };
 
-const validationSchema = Yup.object({
-  source: Yup.string().required('Source Location is required field'),
-  destination: Yup.string().required('Destination Location is required field'),
-  carType: Yup.string().required('Car type is required field'),
-  noOfTravellers: Yup.string().required('Number of Travellers is required field')
+let validationSchema = Yup.object({
+  source: Yup.string().required(),
+  destination: Yup.string().required(),
+  carType: Yup.string().required(),
+  noOfTravellers: Yup.number().required().max(4, 'Travellers should equal or less than 4')
 })
 
 
@@ -48,7 +48,8 @@ export default function LocationDetails() {
               props["labelName"] = "Source Location";
               props["inputType"] = "text";
               props['halfWidth'] = true;
-              return <Input {...props} />;
+              props['required'] = true;
+               return <Input {...props} />;
             }}
           </Field>
           <Field name="destination">
@@ -58,6 +59,7 @@ export default function LocationDetails() {
               props["labelName"] = "Destination Location";
               props["inputType"] = "text";
               props['halfWidth'] = true;
+              props['required'] = true;
               return <Input {...props} />;
             }}
           </Field>
@@ -75,6 +77,7 @@ export default function LocationDetails() {
             props["labelName"] = "Number of Travellers";
             props["inputType"] = "number";
             props['halfWidth'] = false;
+            props['required'] = true;
             return <Input {...props} />;
           }}
         </Field>
